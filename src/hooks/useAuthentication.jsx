@@ -71,7 +71,7 @@ import {
   
       try {
         await signInWithEmailAndPassword(auth, data.email, data.password);
-      } catch (error) {
+      } catch (error) {        
         console.log(error.message);
         console.log(typeof error.message);
         console.log(error.message.includes("user-not"));
@@ -85,13 +85,13 @@ import {
         } else {
           systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
         }
-  
-        console.log(systemErrorMessage);
+        
+        console.log("Erro no hook: " + systemErrorMessage);
   
         setError(systemErrorMessage);
       }
   
-      console.log(error);
+      console.log("Error:" + error);
   
       setLoading(false);
     };

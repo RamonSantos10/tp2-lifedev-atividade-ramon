@@ -19,13 +19,15 @@ const Login = () => {
             password,
         }
 
-        const res = await login(user)
+      
+        const res = await login(user).catch((e) => console.log(e.message))
+        
 
-        console.log(res)
+        console.log(`Login ${res} - Bem Sucedido`)
     }
 
     useEffect(() => {
-        console.log(authError)
+        console.log(`AuthError: ${authError}`)
         if (authError) {
             setError(authError)
         }
