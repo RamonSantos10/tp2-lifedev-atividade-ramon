@@ -15,16 +15,16 @@
   text-transform: uppercase;
 }
 
-.links_list {
+.link_list {
   display: flex;
   list-style: none;
 }
 
-.links_list li {
+.link_list li {
   margin-right: 1em;
 }
 
-.links_list li a {
+.link_list li a {
   padding: 0.4em 0.6em;
 }
 
