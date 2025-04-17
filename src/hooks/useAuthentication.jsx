@@ -33,10 +33,12 @@ export const useAuthentication = () => {
         data.password
       );
 
+
       await updateProfile(user, {
         displayName: data.displayName,
       });
 
+      
       return user;
     } catch (error) {
       // console.log('deu ruim no cadastro: ' + error.message);
@@ -53,6 +55,7 @@ export const useAuthentication = () => {
       }
 
       setError(systemErrorMessage);
+      return null
     }
     finally {
       setLoading(false);

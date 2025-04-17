@@ -20,8 +20,11 @@ const Register = () => {
 
 
   useEffect(() => {
-    authError && setError(authError)
+    if (authError) {
+      setError(authError)
+    }
   }, [authError])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -43,20 +46,13 @@ const Register = () => {
 
     const createdUser = await createUser(user)
 
-    if (authError !== null) {
-      setError(authError)
-      return
-    }
-
-    // console.log(error == null && authError == null ? 'funfou' : 'não funfou');
-    
-    if(error === null) navigate('/login')
-    
+    createdUser && navigate('/')
 
 
+    // console.log(error == null && authError == null ? 'funfou' : 'não funfou');   
   }
 
-  
+
 
 
   return (
