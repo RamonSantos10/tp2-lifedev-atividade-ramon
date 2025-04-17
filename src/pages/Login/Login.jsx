@@ -1,6 +1,9 @@
 import styles from './Login.module.css'
 import { useEffect, useState } from 'react'
 import { useAuthentication } from '../../hooks/useAuthentication'
+import AuthLayout from '../../components/AuthLayout'
+import { NavLink } from 'react-router-dom'
+
 
 
 const Login = () => {
@@ -19,9 +22,9 @@ const Login = () => {
             password,
         }
 
-      
+
         const res = await login(user).catch((e) => console.log(e.message))
-        
+
 
         console.log(`Login ${res} - Bem Sucedido`)
     }
@@ -34,37 +37,44 @@ const Login = () => {
     }, [authError])
 
     return (
-        <div className={styles.login}>
-            <h1>Entrar</h1>
-            <p>Faça login em nossa plataforma de desenvolvedores</p>
-            <form onSubmit={handlerSubmit}>
-                <label>
-                    <span>E-mail: </span>
-                    <input
-                        type='email'
-                        name='email'
-                        required
-                        placeholder='E-mail do usuário'
-                        onChange={(e) => setEmail(e.target.value)}
-                        value={email}
-                    />
-                </label>
-                <label>
-                    <span>Senha: </span>
-                    <input
-                        type='password'
-                        name='password'
-                        required
-                        placeholder='Insira sua senha'
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                    />
-                </label>
-                {!loading && <button className='btn'>Entrar</button>}
-                {loading && <button className='btn' disabled>Aguarde... </button>}
-                {error && <p>{error}</p>}
-            </form>
-        </div>
+        <AuthLayout>
+            <div className={styles.login}>
+                <h1>Life Dev</h1>
+                <h2>Entrar</h2>
+                <p>Faça login em nossa plataforma de desenvolvedores</p>
+                <form onSubmit={handlerSubmit}>
+                    <label>
+                        <span>E-mail: </span>
+                        <input
+                            type='email'
+                            name='email'
+                            required
+                            placeholder='E-mail do usuário'
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                        />
+                    </label>
+                    <label>
+                        <span>Senha: </span>
+                        <input
+                            type='password'
+                            name='password'
+                            required
+                            placeholder='Insira sua senha'
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                        />
+                    </label>
+                    {!loading && <button className='btn'>Entrar</button>}
+                    {loading && <button className='btn' disabled>Aguarde... </button>}
+                    {error && <p>{error}</p>}
+                    <p>
+                        Ainda não tem uma conta? <NavLink to={"/register"}>Cadastre-se</NavLink>
+                    </p>
+                </form>
+            </div>
+        </AuthLayout>
+
     )
 }
 export default Login

@@ -6,17 +6,17 @@ const Navbar = () => {
     <>
       <nav className={styles.navbar}>
         <ul className={styles.link_list}>
-          <NavLink to='/' className={styles.brand}>
+          <NavLink to='/' className={({ isActive }) => `${styles.brand} ${isActive ? styles.active : ''}`}>
             <li>
               <span>Life</span>Dev
             </li>
           </NavLink>
-          <NavLink  to='/login' className={styles.brand} activeClassName={styles.active}>
+          <NavLink  to='/login' className={({ isActive }) => `${styles.brand} ${isActive ? styles.active : ''}`}>
             <li>
               <span>Login</span>
             </li>
           </NavLink>
-          <NavLink to='/register' className={styles.brand} activeClassName={styles.active}>
+          <NavLink to='/register' className={({ isActive }) => `${styles.brand} ${isActive ? styles.active : ''}`}>
             <li>
               <span>Register</span>
             </li>
