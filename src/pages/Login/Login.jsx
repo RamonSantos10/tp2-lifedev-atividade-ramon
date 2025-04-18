@@ -1,10 +1,7 @@
-import styles from './Login.module.css'
 import { useEffect, useState } from 'react'
 import { useAuthentication } from '../../hooks/useAuthentication'
 import AuthLayout from '../../layouts/AuthLayout'
 import { useNavigate, NavLink } from 'react-router-dom'
-
-
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -28,7 +25,6 @@ const Login = () => {
     }
 
     useEffect(() => {
-        // console.log(`AuthError: ${authError}`)
         if (authError) {
             setError(authError)
         }
@@ -36,16 +32,18 @@ const Login = () => {
 
     return (
         <AuthLayout>
-            <div className={styles.login}>
-                <NavLink to='/'>
-                    <h1>Life Dev</h1>
+            <div className="text-center">
+                <NavLink to='/' className="text-4xl font-bold mb-8 block">
+                    <span className="font-black">Life</span>Dev
                 </NavLink>
 
-                <h2>Entrar</h2>
-                <p>Faça login em nossa plataforma de desenvolvedores</p>
-                <form onSubmit={handlerSubmit}>
-                    <label>
-                        <span>E-mail: </span>
+                <h2 className="text-2xl font-bold mb-2">Entrar</h2>
+                <p className="text-gray-600 mb-8">Faça login em nossa plataforma de desenvolvedores</p>
+                <form onSubmit={handlerSubmit} className="space-y-6">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            E-mail
+                        </label>
                         <input
                             type='email'
                             name='email'
@@ -53,10 +51,13 @@ const Login = () => {
                             placeholder='E-mail do usuário'
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         />
-                    </label>
-                    <label>
-                        <span>Senha: </span>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Senha
+                        </label>
                         <input
                             type='password'
                             name='password'
@@ -64,13 +65,28 @@ const Login = () => {
                             placeholder='Insira sua senha'
                             onChange={(e) => setPassword(e.target.value)}
                             value={password}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         />
-                    </label>
-                    {!loading && <button className='btn' type='submit'>Entrar</button>}
-                    {loading && <button className='btn' disabled>Aguarde... </button>}
-                    {error && <p>{error}</p>}
-                    <p>
-                        Ainda não tem uma conta? <NavLink to={"/register"}>Cadastre-se</NavLink>
+                    </div>
+                    {!loading && 
+                        <button 
+                            type='submit'
+                            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                            Entrar
+                        </button>
+                    }
+                    {loading && 
+                        <button 
+                            disabled 
+                            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-blue-400 cursor-not-allowed"
+                        >
+                            Aguarde...
+                        </button>
+                    }
+                    {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+                    <p className="text-sm text-gray-600 mt-4">
+                        Ainda não tem uma conta? <NavLink to="/register" className="text-blue-600 hover:text-blue-500">Cadastre-se</NavLink>
                     </p>
                 </form>
             </div>
