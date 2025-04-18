@@ -1,6 +1,6 @@
-import { auth } from '../firebase/config'
-import { useAuthentication } from '../hooks/useAuthentication'
-import styles from './Navbar.module.css'
+import { auth } from '../../firebase/config'
+import { useAuthentication } from '../../hooks/useAuthentication'
+import styles from './styles.module.css'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {

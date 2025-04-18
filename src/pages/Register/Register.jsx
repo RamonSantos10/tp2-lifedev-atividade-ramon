@@ -1,7 +1,7 @@
 import styles from './Register.module.css'
 import React, { useEffect, useState } from 'react'
 import { useAuthentication } from '../../hooks/useAuthentication';
-import AuthLayout from "../../components/AuthLayout";
+import AuthLayout from '../../layouts/AuthLayout'
 import { NavLink, useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase/config';

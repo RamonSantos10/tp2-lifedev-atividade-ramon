@@ -1,4 +1,4 @@
-import Layout from '../../components/Layout'
+import Layout from '../../layouts/MainLayout'
 import { auth } from '../../firebase/config'
 import styles from './Landing.module.css'
 

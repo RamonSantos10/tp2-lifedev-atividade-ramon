@@ -1,7 +1,7 @@
 import styles from './Login.module.css'
 import { useEffect, useState } from 'react'
 import { useAuthentication } from '../../hooks/useAuthentication'
-import AuthLayout from '../../components/AuthLayout'
+import AuthLayout from '../../layouts/AuthLayout'
 import { useNavigate, NavLink } from 'react-router-dom'
 
 
