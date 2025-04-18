@@ -2,7 +2,7 @@ import styles from './Login.module.css'
 import { useEffect, useState } from 'react'
 import { useAuthentication } from '../../hooks/useAuthentication'
 import AuthLayout from '../../components/AuthLayout'
-import { NavLink } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 
 
 
@@ -10,27 +10,25 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const navigate = useNavigate();
 
     const { login, error: authError, loading } = useAuthentication()
 
     const handlerSubmit = async (e) => {
         e.preventDefault()
 
-        setError("")
+        setError(null)
         const user = {
             email,
             password,
         }
+        const loggedUser = await login(user)
 
-
-        const res = await login(user).catch((e) => console.log(e.message))
-
-
-        console.log(`Login ${res} - Bem Sucedido`)
+        loggedUser && navigate('/home')
     }
 
     useEffect(() => {
-        console.log(`AuthError: ${authError}`)
+        // console.log(`AuthError: ${authError}`)
         if (authError) {
             setError(authError)
         }
@@ -39,7 +37,10 @@ const Login = () => {
     return (
         <AuthLayout>
             <div className={styles.login}>
-                <h1>Life Dev</h1>
+                <NavLink to='/'>
+                    <h1>Life Dev</h1>
+                </NavLink>
+
                 <h2>Entrar</h2>
                 <p>Faça login em nossa plataforma de desenvolvedores</p>
                 <form onSubmit={handlerSubmit}>
@@ -65,7 +66,7 @@ const Login = () => {
                             value={password}
                         />
                     </label>
-                    {!loading && <button className='btn'>Entrar</button>}
+                    {!loading && <button className='btn' type='submit'>Entrar</button>}
                     {loading && <button className='btn' disabled>Aguarde... </button>}
                     {error && <p>{error}</p>}
                     <p>

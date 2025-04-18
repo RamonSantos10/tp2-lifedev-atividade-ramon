@@ -46,7 +46,7 @@ const Register = () => {
 
     const createdUser = await createUser(user)
 
-    createdUser && navigate('/')
+    createdUser && navigate('/login')
 
 
     // console.log(error == null && authError == null ? 'funfou' : 'não funfou');   
@@ -58,7 +58,9 @@ const Register = () => {
   return (
     <AuthLayout>
       <div className={styles.register}>
-        <h1>Life Dev</h1>
+        <NavLink to='/'>
+          <h1>Life Dev</h1>
+        </NavLink>
         <h2>Cadastrar</h2>
         <p>Crie uma conta em nossa plataforma de desenvolvedores</p>
         <form onSubmit={handleSubmit}>

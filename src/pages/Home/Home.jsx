@@ -5,7 +5,7 @@ import styles from './Home.module.css'
 const Home = () => {
   return (
     <Layout>
-      <h1>Olá <span>{auth.currentUser.displayName}</span></h1>
+      {auth.currentUser && <h1>Olá <span>{auth.currentUser.displayName}</span></h1> }
       <h2>Veja os posts mais recentes</h2>
       <form className={styles.search_form}>
         <input

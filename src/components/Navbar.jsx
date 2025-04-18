@@ -1,29 +1,45 @@
+import { auth } from '../firebase/config'
+import { useAuthentication } from '../hooks/useAuthentication'
 import styles from './Navbar.module.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+
+  const navigate = useNavigate()
+  const { logout } = useAuthentication();
+
+  const handlerLogout = () => {
+    logout();
+    navigate('/login')
+  }
+
   return (
     <>
       <nav className={styles.navbar}>
         <ul className={styles.link_list}>
-          <NavLink to='/' className={({ isActive }) => `${styles.brand} ${isActive ? styles.active : ''}`}>
+          <NavLink to={!auth.currentUser ? '/' : '/home'} className={({ isActive }) => `${styles.brand} ${isActive ? styles.active : ''}`}>
             <li>
               <span>Life</span>Dev
             </li>
           </NavLink>
-          <NavLink  to='/login' className={({ isActive }) => `${styles.brand} ${isActive ? styles.active : ''}`}>
+          {!auth.currentUser && <NavLink to='/login' className={({ isActive }) => `${styles.brand} ${isActive ? styles.active : ''}`}>
             <li>
               <span>Login</span>
             </li>
-          </NavLink>
-          <NavLink to='/register' className={({ isActive }) => `${styles.brand} ${isActive ? styles.active : ''}`}>
+          </NavLink>}
+          {!auth.currentUser && <NavLink to='/register' className={({ isActive }) => `${styles.brand} ${isActive ? styles.active : ''}`}>
             <li>
               <span>Register</span>
             </li>
-          </NavLink>
+          </NavLink>}
           <li>
-            <button className={styles.exit}>Exit</button>
+            <span>{auth.currentUser? 'Autenticado' : 'Não Autenticado'}</span>
           </li>
+
+          <li>
+            <button className={styles.exit} onClick={handlerLogout}>Exit</button>
+          </li>
+
         </ul>
       </nav>
     </>

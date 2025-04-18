@@ -67,6 +67,7 @@ export const useAuthentication = () => {
     checkIfIsCancelled();
 
     signOut(auth);
+    
   };
 
   const login = async (data) => {
@@ -76,30 +77,32 @@ export const useAuthentication = () => {
     setError(false);
 
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      const { user } = await signInWithEmailAndPassword(auth, data.email, data.password);
+      console.log('login bem sucedido!');
+      
+      return user;
     } catch (error) {
-      console.log(error.message);
-      console.log(typeof error.message);
-      console.log(error.message.includes("user-not"));
 
       let systemErrorMessage;
 
       if (error.message.includes("user-not-found")) {
         systemErrorMessage = "Usuário não encontrado.";
-      } else if (error.message.includes("wrong-password")) {
-        systemErrorMessage = "Senha incorreta.";
+      } else if (error.message.includes("wrong-password") || error.message.includes("invalid-credential")) {
+        systemErrorMessage = "Email e/ou senha invalido(s)";
       } else {
         systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
       }
 
-      console.log("Erro no hook: " + systemErrorMessage);
+      console.log("Erro no login: " + systemErrorMessage);
 
       setError(systemErrorMessage);
+      return null
+    }
+    finally {
+      setLoading(false);
     }
 
-    console.log("Error:" + error);
-
-    setLoading(false);
+    
   };
 
   useEffect(() => {
